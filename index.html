@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ครบ 1 เดือนของเรา 💕</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Kanit',sans-serif;
+}
+
+body{
+    overflow:hidden;
+    background:linear-gradient(135deg,#ffb6d9,#ffd6ec,#ffe8f5);
+}
+
+.container{
+    width:100%;
+    height:100vh;
+    position:relative;
+    overflow:hidden;
+}
+
+.page{
+    width:100%;
+    height:100vh;
+    position:absolute;
+    top:0;
+    left:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:25px;
+    transition:1s ease;
+    text-align:center;
+}
+
+.page.active{
+    left:0;
+}
+
+.page.prev{
+    left:-100%;
+}
+
+/* card */
+.card{
+    background:rgba(255,255,255,.35);
+    backdrop-filter:blur(12px);
+    border:2px solid rgba(255,255,255,.5);
+    border-radius:30px;
+    padding:30px 20px;
+    box-shadow:0 10px 40px rgba(255,105,180,.25);
+    animation:float 3s ease-in-out infinite;
+    max-width:420px;
+    width:100%;
+}
+
+/* text */
+h1{
+    color:#ff2f7b;
+    font-size:2.4rem;
+    margin-bottom:15px;
+    text-shadow:0 0 15px rgba(255,255,255,.8);
+    line-height:1.3;
+}
+
+p{
+    color:#8b2958;
+    font-size:1.15rem;
+    line-height:2;
+    max-width:340px;
+    white-space:pre-line;
+    margin:0 auto;
+}
+
+/* button */
+.btn{
+    margin-top:25px;
+    background:linear-gradient(45deg,#ff4f9f,#ff85c2);
+    border:none;
+    padding:14px 28px;
+    border-radius:999px;
+    color:white;
+    font-size:1rem;
+    cursor:pointer;
+    box-shadow:0 5px 20px rgba(255,20,147,.35);
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:scale(1.08);
+}
+
+.button-group{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+/* image */
+.memory{
+    width:260px;
+    height:360px;
+    border-radius:25px;
+    object-fit:cover;
+    margin-bottom:18px;
+    border:5px solid white;
+    box-shadow:0 10px 30px rgba(255,105,180,.35);
+    cursor:pointer;
+    transition:.3s;
+}
+
+/* 🔥 รูปชัด */
+.memory.active{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:auto;
+    height:auto;
+    max-width:95vw;
+    max-height:95vh;
+    object-fit:contain;
+    z-index:9999;
+    border-radius:20px;
+    box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+
+/* overlay */
+.overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.25);
+    z-index:9998;
+    display:none;
+}
+
+.overlay.show{
+    display:block;
+}
+
+/* hearts */
+.hearts span{
+    position:absolute;
+    bottom:-50px;
+    font-size:20px;
+    animation:heart linear infinite;
+    opacity:.7;
+    filter:drop-shadow(0 0 10px #ff85c2);
+    will-change:transform;
+}
+
+@keyframes heart{
+    0%{transform:translateY(0) scale(1) rotate(0deg);opacity:0;}
+    30%{opacity:1;}
+    100%{transform:translateY(-110vh) scale(1.5) rotate(360deg);opacity:0;}
+}
+
+/* stars */
+.stars{
+    position:absolute;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+.stars span{
+    position:absolute;
+    width:4px;
+    height:4px;
+    background:white;
+    border-radius:50%;
+    animation:twinkle 3s infinite;
+}
+
+@keyframes twinkle{
+    0%,100%{opacity:.2;}
+    50%{opacity:1;}
+}
+
+/* float */
+@keyframes float{
+    0%,100%{transform:translateY(0px);}
+    50%{transform:translateY(-10px);}
+}
+
+/* text anim */
+.line{
+    display:block;
+    opacity:0;
+    transform:translateY(12px);
+    animation:lineUp .6s ease forwards;
+}
+
+@keyframes lineUp{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.music-box{
+    width:100%;
+    max-width:340px;
+    margin:30px auto 0;
+    border-radius:25px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(255,105,180,.25);
+}
+
+.music-box iframe{
+    display:block;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="stars"></div>
+<div class="hearts"></div>
+
+<div class="overlay" onclick="closeImage()"></div>
+
+<!-- หน้า 1 -->
+<div class="page active">
+<div class="card">
+<h1>ครบ 1 เดือนแล้วนะ 💖</h1>
+<p>
+จากวันแรกที่ได้คุยกัน
+จนถึงวันนี้
+รักมากขึ้นทุกวันเลยน๊า ✨
+</p>
+<div class="button-group">
+<button class="btn" onclick="nextPage()">กดต่อค้าบ 💕</button>
+</div>
+<div class="music-box">
+<iframe width="100%" height="200"
+src="https://www.youtube.com/embed/1OMZrYHIim8"
+frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+</div>
+
+<!-- หน้า 2 -->
+<div class="page">
+<div class="card">
+<img class="memory" onclick="zoomImage(this)"
+src="https://uploads.onecompiler.io/44km4tym7/44ngamr74/IMG_0951.jpeg">
+<h1>ขอบคุณนะ 🌷</h1>
+<p>
+ขอบคุณที่เข้ามาอยู่ในทุกวันของพี่
+ขอบคุณที่ทำให้พี่ยิ้มได้เสมอ
+และขอบคุณที่ทำให้ทุกเดือนน่ารักมากๆ 💞
+</p>
+<div class="button-group">
+<button class="btn" onclick="prevPage()">ย้อนกลับ 💗</button>
+<button class="btn" onclick="nextPage()">ต่ออีกกก 💌</button>
+</div>
+</div>
+</div>
+
+<!-- หน้า 3 -->
+<div class="page">
+<div class="card">
+<img class="memory" onclick="zoomImage(this)"
+src="https://uploads.onecompiler.io/44km4tym7/44ngamr74/IMG_1048.png">
+<h1>อยากจะบอกว่า🤍</h1>
+<p>
+พี่อาจจะไม่ได้เก่งเรื่องความรัก
+แต่ทุกความรู้สึกที่มีให้
+คือความจริงทุกอย่างที่ตั้งใจรักหนูพร ☁️
+</p>
+<div class="button-group">
+<button class="btn" onclick="prevPage()">ย้อนกลับ 💗</button>
+<button class="btn" onclick="nextPage()">ยังไม่หมดนะ ✨</button>
+</div>
+</div>
+</div>
+
+<!-- หน้า 4 -->
+<div class="page">
+<div class="card">
+<img class="memory" onclick="zoomImage(this)"
+src="https://uploads.onecompiler.io/44km4tym7/44ngamr74/IMG_0827.jpeg">
+<h1>และสุดท้าย...</h1>
+<p>
+พี่อยากเดินไปพร้อมหนู
+สร้างทุกวันดีๆด้วยกันอีกเยอะๆ
+เดือนนี้พี่มีหนูแล้ว
+เดือนต่อไปขอมีหนูอยู่ด้วยทุกเดือนเลยนะ 💗
+</p>
+<div class="button-group">
+<button class="btn" onclick="prevPage()">ย้อนกลับ 💗</button>
+<button class="btn" onclick="showLove()">กดตรงนี้เยย 💘</button>
+</div>
+</div>
+</div>
+
+</div>
+
+<script>
+
+const pages = document.querySelectorAll('.page');
+let currentPage = 0;
+
+function nextPage(){
+if(currentPage < pages.length - 1){
+pages[currentPage].classList.remove('active');
+pages[currentPage].classList.add('prev');
+currentPage++;
+pages[currentPage].classList.add('active');
+animateText(pages[currentPage]);
+}
+}
+
+function prevPage(){
+if(currentPage > 0){
+pages[currentPage].classList.remove('active');
+currentPage--;
+pages[currentPage].classList.remove('prev');
+pages[currentPage].classList.add('active');
+animateText(pages[currentPage]);
+}
+}
+
+function showLove(){
+alert('ครบ 1 เดือนแล้วนะ ขอบคุณที่อยู่ด้วยกัน 💖');
+}
+
+const overlay = document.querySelector('.overlay');
+
+function zoomImage(img){
+document.querySelectorAll('.memory').forEach(i=>i.classList.remove('active'));
+img.classList.add('active');
+overlay.classList.add('show');
+}
+
+function closeImage(){
+document.querySelectorAll('.memory').forEach(i=>i.classList.remove('active'));
+overlay.classList.remove('show');
+}
+
+function animateText(page){
+const targets = page.querySelectorAll('h1, p');
+targets.forEach(el=>{
+const lines = el.innerText.split('\n');
+el.innerHTML = '';
+lines.forEach((line,i)=>{
+const span = document.createElement('span');
+span.className = 'line';
+span.textContent = line;
+span.style.animationDelay = (i * 0.25) + 's';
+el.appendChild(span);
+});
+});
+}
+
+animateText(document.querySelector('.page.active'));
+
+/* 💖 หัวใจหลายแบบ */
+const heartsContainer = document.querySelector('.hearts');
+const heartTypes = ['💖','💗','💘','💝','💞','💓','❤️','🩷'];
+
+function createHeart(){
+    const heart = document.createElement('span');
+
+    heart.innerHTML = heartTypes[Math.floor(Math.random() * heartTypes.length)];
+    heart.style.left = Math.random() * 100 + 'vw';
+
+    const size = Math.random() * 25 + 10;
+    heart.style.fontSize = size + 'px';
+
+    heart.style.animationDuration = (Math.random() * 4 + 5) + 's';
+
+    heartsContainer.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 10000);
+}
+
+setInterval(createHeart, 200);
+
+</script>
+
+</body>
+</html>
